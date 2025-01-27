@@ -1,0 +1,43 @@
+<div class="flex flex-col md:flex-row h-screen">
+  <!-- Field Groups (Left Pane) -->
+  <div class="w-full md:w-1/4 p-4 bg-white z-50">
+    <app-field-groups
+      [fieldGroups]="fieldGroups"
+      [selectedGroup]="selectedGroup"
+      (groupCreated)="createFieldGroup()"
+      (groupEdited)="editFieldGroup($event)"
+      (groupDeleted)="deleteFieldGroup($event)"
+      (groupSelected)="selectFieldGroup($event)"
+    ></app-field-groups>
+  </div>
+
+  <!-- Form Elements (Middle Pane) -->
+  <div class="w-full md:w-1/2 p-4 bg-gray-200">
+    <app-form-elements
+      [selectedGroup]="selectedGroup"
+      [name]="selectedGroup?.name || ''"
+      [elements]="selectedGroup?.elements || []"
+      (elementSelected)="selectFormElement($event)"
+      (elementDeleted)="deleteFormElement($event)"
+    ></app-form-elements>
+  </div>
+
+  <!-- Available Elements (Right Pane) -->
+  <div class="w-full md:w-1/4 p-4 bg-white z-50">
+    <app-right-pane
+      [availableElements]="availableElements"
+      (elementDragged)="addElementToGroup($event)"
+    ></app-right-pane>
+  </div>
+
+  <!-- Right Drawer for Editing -->
+  <div
+    *ngIf="selectedElement"
+    class="absolute top-0 right-0 bottom-0 w-full md:w-1/4 border-l p-4 bg-gray-50"
+  >
+    <app-right-drawer
+      [selectedElement]="selectedElement"
+      (propertiesSaved)="updateFormElement($event)"
+    ></app-right-drawer>
+  </div>
+</div>

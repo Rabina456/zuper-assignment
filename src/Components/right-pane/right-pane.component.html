@@ -1,0 +1,63 @@
+ <div>
+    <h2 class="text-l text-gray-400 font-semibold mb-4"> Elements</h2>
+    <ul class="space-y-2">
+        <li *ngFor="let element of availableElements" draggable="true"
+            class="p-2 bg-gray-100 rounded cursor-pointer " (dragstart)="dragElement($event,element)"
+            >
+            <!-- {{ element.name }} -->
+            <div *ngIf="element.type === 'single-line-text'">
+                <input
+                  type="text"
+                  class="p-2  rounded"
+                  placeholder="{{ element.placeholder }}"
+                />
+              </div>
+        
+              <div *ngIf="element.type === 'multi-line-text'">
+                <textarea
+                  class="p-2  rounded"
+                  placeholder="{{ element.placeholder }}"
+                ></textarea>
+              </div>
+        
+              <div *ngIf="element.type === 'dropdown'">
+                <select class="p-2  rounded">
+                  <option *ngFor="let option of element.options" [value]="option.value">
+                    {{ option.label }}
+                  </option>
+                </select>
+              </div>
+        
+              <div *ngIf="element.type === 'date'">
+                <input type="date" class="p-2  rounded" />
+              </div>
+        
+              <div *ngIf="element.type === 'time'">
+                <input type="time" class="p-2  rounded" />
+              </div>
+        
+              <div *ngIf="element.type === 'date-time'">
+                <input type="datetime-local" class="p-2  rounded" />
+              </div>
+        
+              <div *ngIf="element.type === 'single-selection'">
+                <input type="radio" class="mr-2" /> {{ element.name }}
+              </div>
+        
+              <div *ngIf="element.type === 'multi-selection'">
+                <input type="checkbox" class="mr-2" /> {{ element.name }}
+              </div>
+        
+              <div *ngIf="element.type === 'upload'">
+                <input type="file" class="p-2  rounded" />
+              </div>
+        
+              <!-- <div *ngIf="element.type !== 'upload' && element.type !== 'single-selection' && element.type !== 'multi-selection'" class="mt-2">
+                <button class="btn-primary" (click)="addElementToGroup(element)">Add to Group</button>
+              </div> -->
+        </li>
+    </ul>
+</div> 
+
+
+  

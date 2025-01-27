@@ -1,0 +1,90 @@
+<div>
+    <h2 class="text-l font-semibold mb-4">{{name}}</h2>
+    <div class="min-h-[200px] p-4" (dragover)="allowDrop($event)">
+      <div
+        *ngFor="let element of elements; let i = index"
+        class="p-2 bg-white rounded mb-2 cursor-pointer"
+        draggable="true"
+        (dragstart)="onDragStart(i, $event)"
+        (dragover)="allowDrop($event)"
+        (drop)="onDropAtIndex($event, i)"
+      >
+        <div *ngIf="editingElement?.id !== element.id">
+          <!-- Form Element Rendering Based on Type -->
+          <div *ngIf="element.type === 'single-line-text'">
+            <input
+              type="text"
+              class="p-2 rounded"
+              placeholder="{{ element.placeholder }}"
+            />
+          </div>
+          <div *ngIf="element.type === 'multi-line-text'">
+            <textarea
+              class="p-2 rounded"
+              placeholder="{{ element.placeholder }}"
+            ></textarea>
+          </div>
+          <div *ngIf="element.type === 'dropdown'">
+            <select class="p-2 rounded">
+              <option *ngFor="let option of element.options" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+          </div>
+          <div *ngIf="element.type === 'date'">
+            <input type="date" class="p-2 rounded" />
+          </div>
+          <div *ngIf="element.type === 'time'">
+            <input type="time" class="p-2 rounded" />
+          </div>
+          <div *ngIf="element.type === 'date-time'">
+            <input type="datetime-local" class="p-2 rounded" />
+          </div>
+          <div *ngIf="element.type === 'single-selection'">
+            <input type="radio" class="mr-2" /> {{ element.name }}
+          </div>
+          <div *ngIf="element.type === 'multi-selection'">
+            <input type="checkbox" class="mr-2" /> {{ element.name }}
+          </div>
+          <div *ngIf="element.type === 'upload'">
+            <input type="file" class="p-2 rounded" />
+          </div>
+  
+          <button
+            class="ml-2 text-red-500"
+            (click)="deleteElement(element); $event.stopPropagation()"
+          >
+            Delete
+          </button>
+          <button
+            class="ml-2 text-blue-500"
+            (click)="startEditing(element); $event.stopPropagation()"
+          >
+            Edit
+          </button>
+        </div>
+  
+        <div *ngIf="editingElement?.id === element.id">
+          <!-- Editable Element Fields -->
+          <label class="block text-sm font-medium">Type:</label>
+          <input
+            *ngIf="editingElement"
+            class="w-full p-2 mb-2 rounded"
+            [(ngModel)]="editingElement.type"
+            (ngModelChange)="updateElementDetails('type', $event)"
+          />
+          <label class="block text-sm font-medium">Name:</label>
+          <input
+            *ngIf="editingElement"
+            class="w-full p-2 mb-2 rounded"
+            [(ngModel)]="editingElement.name"
+            (ngModelChange)="updateElementDetails('name', $event)"
+          />
+          
+          <button class="ml-2 text-green-500" (click)="saveEdit()">Save</button>
+          <button class="ml-2 text-gray-500" (click)="cancelEdit()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,31 @@
+  <div>
+    <h2 class="text-sm font-semibold mb-4">Field Groups</h2>
+    <ul class="space-y-2">
+      <li
+        *ngFor="let group of fieldGroups"
+        (click)="selectFieldGroup(group)"
+        class="p-2 rounded cursor-pointer hover:bg-gray-100"
+        [class.bg-gray-200]="selectedGroup === group"
+      >
+        <h3 class="font-bold">{{ group.name }}</h3>
+        <p class="text-sm text-gray-500">{{ group.description }}</p>
+        <div class="flex space-x-2 mt-2">
+          <button class="text-blue-500 text-sm" (click)="editFieldGroup(group)">Edit</button>
+          <button class="text-red-500 text-sm" (click)="deleteFieldGroup(group)">Delete</button>
+        </div>
+      </li>
+    </ul>
+    <button
+      class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 w-full"
+      (click)="createFieldGroup()"
+    >
+      Create Field Group
+    </button>
+  </div>
+  
+
+  
+   
+
+  
+  

@@ -1,0 +1,9 @@
+<!-- src/app/shared/components/modal/modal.component.html -->
+<div *ngIf="isVisible" class="modal-overlay">
+    <div class="modal">
+      <h2>{{ title }}</h2>
+      <ng-content></ng-content>
+      <button (click)="close()">Close</button>
+    </div>
+  </div>
+  

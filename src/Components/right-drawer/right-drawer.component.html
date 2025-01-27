@@ -1,0 +1,29 @@
+<div *ngIf="selectedElement" class="p-4">
+    <h2 class="text-xl font-semibold mb-4">Field Properties</h2>
+    <form (ngSubmit)="saveProperties()" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium mb-1">Field Name</label>
+        <input type="text" class="w-full p-2 border rounded" [(ngModel)]="selectedElement.name" name="name" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">Description</label>
+        <textarea class="w-full p-2 border rounded" [(ngModel)]="selectedElement.description" name="description"></textarea>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">Placeholder</label>
+        <input type="text" class="w-full p-2 border rounded" [(ngModel)]="selectedElement.placeholder" name="placeholder" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">Required</label>
+        <input type="checkbox" [(ngModel)]="selectedElement.required" name="required" /> Mandatory
+      </div>
+      <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 w-full" type="submit">
+        Save
+      </button>
+    </form>
+  </div>
+   
+
+   
+  
+  
